@@ -1,0 +1,20 @@
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.network "private_network", ip: "192.168.50.5"
+config.vm.provider "virtualbox" do |vb|
+  vb.memory = "1024"
+  vb.name = "ntp_server_lb1"
+end
+config.vm.provision "shell", inline: <<-SHELL
+  # install programm
+  sudo apt update
+  sudo apt-get -y install ntp
+
+  # firewall
+  sudo ufw allow 22/tcp
+  sudo ufw allow 123/udp
+  sudo ufw -f enable
+
+  sudo apt-get -y install ntp
+SHELL
+end
