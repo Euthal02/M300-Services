@@ -30,4 +30,19 @@ vagrant plugin install vagrant-reload
 Anschliessend kann mit der folgenden Option in enem Vagrantfile ein reload gemacht werden: `config.vm.provision :reload`
 
 ## Installation
-Bei der eigentlichen Installation mussten wir zuerst herausfinden wie es genau funktioniert zwei VMs zu erstellen. Dies konnte einfach und schnell erledigt werden. Zur gleichen Zeit setzten wir per Hand einen Mail **(SMTP)** Server auf. Durch die Teamaufteilung konnte das gemacht werden. Der Sinn dahinter war, die Installation einmal durchzugehen und anschliessend in Vagrant Commands umzusetzen.
+Bei der eigentlichen Installation mussten wir zuerst herausfinden wie es genau funktioniert zwei VMs zu erstellen. Dies konnte einfach und schnell erledigt werden. Zur gleichen Zeit setzten wir per Hand einen Mail **(SMTP)** Server auf.
+
+Durch die Teamaufteilung konnte das gemacht werden. Der Sinn dahinter war, die Installation einmal durchzugehen und anschliessend in Vagrant Commands umzusetzen.
+
+Anschliessend hatten wir einige Probleme, da der Service bei der Installation eine interaktive Installation drcchführen wollte. Bis wir die Möglichkeit gefunden haben *noninteractive* zu installieren.
+https://serverfault.com/questions/143968/automate-the-installation-of-postfix-on-ubuntu
+```
+If you want this globally:
+
+dpkg-reconfigure debconf
+Then configure it to be "noninteractive"
+
+If you just want it for single install run:
+
+DEBIAN_FRONTEND=noninteractive apt-get install PACKAGE
+```
