@@ -1,9 +1,8 @@
 Vagrant.configure(2) do |config|
-  config.vm.define "mail_server_1" do |ms1|
+  config.vm.define "mail-server-1" do |ms1|
     ms1.vm.box = "ubuntu/xenial64"
-    ms1.vm.hostname = "mail_server_1_hostname"
+    ms1.vm.hostname = "mail-server-1-hostname"
     ms1.vm.network "forwarded_port", guest: 80, host: 8080
-    ms1.vm.network "private_network", ip: "192.168.50.5"
     ms1.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.name = "mail_server_1"
@@ -11,22 +10,22 @@ Vagrant.configure(2) do |config|
     # mit diesem abschnitt bringen wir die VM auf den eusten stand
     ms1.vm.provision "shell", inline: <<-SHELL
       # install programm
-      sudo apt update
-      sudo apt upgrade -y
-      sudo apt dist-upgrade -y
+      sudo apt-get update
+      sudo apt-get upgrade -y
+      sudo apt-get dist-upgrade -y
       SHELL
     # nach den aktualisierungen muss die vm reloaded werden,
     # um eien möglichen reboot nach den aktualisierungen durchzuführen
-    config.vm.provision :reload
-    config.vm.provision "shell", inline: <<-SHELL
-      sudo apt-get -y install ntp
+    ms1.vm.provision :reload
+    ms1.vm.provision "shell", inline: <<-SHELL
+      sudo apt-get -y install apache2
       SHELL
   end
 
-  config.vm.define "mail_server_2" do |ms1|
+  config.vm.define "mail-server-2" do |ms2|
     ms2.vm.box = "ubuntu/xenial64"
-    ms2.vm.hostname = "mail_server_2_hostname"
-    ms1.vm.network "forwarded_port", guest: 80, host: 9080
+    ms2.vm.hostname = "mail-server-2-hostname"
+    ms2.vm.network "forwarded_port", guest: 80, host: 9080
     ms2.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.name = "mail_server_2"
@@ -34,14 +33,15 @@ Vagrant.configure(2) do |config|
     # mit diesem abschnitt bringen wir die VM auf den eusten stand
     ms2.vm.provision "shell", inline: <<-SHELL
       # install programm
-      sudo apt update
-      sudo apt upgrade -y
-      sudo apt dist-upgrade -y
+      sudo apt-get update
+      sudo apt-get upgrade -y
+      sudo apt-get dist-upgrade -y
       SHELL
     # nach den aktualisierungen muss die vm reloaded werden,
     # um eien möglichen reboot nach den aktualisierungen durchzuführen
-    config.vm.provision :reload
-    config.vm.provision "shell", inline: <<-SHELL
-      sudo apt-get -y install ntp
+    ms2.vm.provision :reload
+    ms2.vm.provision "shell", inline: <<-SHELL
+      sudo apt-get -y install apache2
       SHELL
   end
+end
