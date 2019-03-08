@@ -9,6 +9,13 @@ So in etwa würde unsere Umgebung aussehen:
 ![alt text](https://thomas-leister.de/images/2016/04/21/mailserver-schema.png "Unser gewolltes Setup")
 Beide werden eine solche Umgebung aufbauen. er /etc/hosts werden wir dann in der Lage sein eine Domain zu mappen.
 
+### Infos
+Um in das Thema hinein zu kommen, haben wir folgende Seite als Infoquelle genutzt:
+https://wiki.ubuntuusers.de/Mailserver-Einf%C3%BChrung/
+
+Dieses Bild dient zur Visualiersierung, was alles installiert werden muss.
+![alt text](https://media-cdn.ubuntu-de.org/wiki/attachments/19/30/mail_visual.png "Verbildlichung des gewollten Setups")
+
 ## Vorbereitungen
 Um meine VM möglichst sicher zu machen, müssen alle Updates installiert sein, damit keine Sicherheitslücken geöffnt sind. Nach den Aktualisierungen muss oftmals ein Reboot gemacht werden.
 
