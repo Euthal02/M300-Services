@@ -10,7 +10,8 @@ So in etwa würde unsere Umgebung aussehen:
 Beide werden eine solche Umgebung aufbauen. er /etc/hosts werden wir dann in der Lage sein eine Domain zu mappen.
 
 ## Vorbereitungen
-Um meine VM möglichst sicher zu machen, müssen alle Updates installiert sein, damit keine Sicherheitslücken geöffnt sind. Nach den Aktualisierungen muss oftmals ein Reboot gemacht werden, darum war es wichtig, dass Vagrant die Box rebooten kann und direkt weiter im Vagrantfile rbeiten kann. Dzu musste das vagrant-plugin reload installiert werden, dies erreicht man mit folgendem Command:
+Um meine VM möglichst sicher zu machen, müssen alle Updates installiert sein, damit keine Sicherheitslücken geöffnt sind. Nach den Aktualisierungen muss oftmals ein Reboot gemacht werden.
+Darum war es wichtig, dass Vagrant die Box rebooten kann und direkt weiter im Vagrantfile arbeiten kann. Dzu musste das vagrant-plugin reload installiert werden, dies erreicht man mit folgendem Command:
 ```
 vagrant plugin install vagrant-reload
 ```
