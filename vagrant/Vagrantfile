@@ -1,15 +1,18 @@
 Vagrant.configure(2) do |config|
+  # define our first vm, named mail-server-1
   config.vm.define "mail-server-1" do |ms1|
+    # define the needed infomation, so that the vm can get created
     ms1.vm.box = "ubuntu/xenial64"
     ms1.vm.hostname = "mail-server-1-hostname"
     ms1.vm.network "forwarded_port", guest: 80, host: 8080
+    # here we define the physical propertys of the vm
     ms1.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.name = "mail_server_1"
     end
     # mit diesem abschnitt bringen wir die VM auf den eusten stand
     ms1.vm.provision "shell", inline: <<-SHELL
-      # install programm
+      # install latest updates
       sudo apt-get update
       sudo apt-get upgrade -y
       sudo apt-get dist-upgrade -y
@@ -22,17 +25,20 @@ Vagrant.configure(2) do |config|
       SHELL
   end
 
+  # the second vm gets defined with a different name
   config.vm.define "mail-server-2" do |ms2|
+    # again, the needed information
     ms2.vm.box = "ubuntu/xenial64"
     ms2.vm.hostname = "mail-server-2-hostname"
     ms2.vm.network "forwarded_port", guest: 80, host: 9080
+    # the physical propertys
     ms2.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
       vb.name = "mail_server_2"
     end
     # mit diesem abschnitt bringen wir die VM auf den eusten stand
     ms2.vm.provision "shell", inline: <<-SHELL
-      # install programm
+      # install latest updates
       sudo apt-get update
       sudo apt-get upgrade -y
       sudo apt-get dist-upgrade -y
