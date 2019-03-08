@@ -10,11 +10,14 @@ So in etwa würde unsere Umgebung aussehen:
 Beide werden eine solche Umgebung aufbauen. er /etc/hosts werden wir dann in der Lage sein eine Domain zu mappen.
 
 ### Infos
-Um in das Thema hinein zu kommen, haben wir folgende Seite als Infoquelle genutzt:
+Um in das Thema hinein zu kommen, haben wir folgende Seite als Infoquelle genutzt:<br>
 https://wiki.ubuntuusers.de/Mailserver-Einf%C3%BChrung/
 
 Dieses Bild dient zur Visualiersierung, was alles installiert werden muss.
 ![alt text](https://media-cdn.ubuntu-de.org/wiki/attachments/19/30/mail_visual.png "Verbildlichung des gewollten Setups")
+Die beiden Mail Clients können von unseren Hosts genutzt werden, da wir schon Mail Programme benutzen. Wir werden also in der Lage sein einen zusätzlichen Account einzurichten und diesen zu benutzen.
+
+Als MTA werden wir **postfix** nutzen. MDA wird voraussichtlicher Weise **Dovecot** sein. Dieser Server unterstützt IMAP und daher auch entsprechend unseren Erwartungen genügend.
 
 ## Vorbereitungen
 Um meine VM möglichst sicher zu machen, müssen alle Updates installiert sein, damit keine Sicherheitslücken geöffnt sind. Nach den Aktualisierungen muss oftmals ein Reboot gemacht werden.
