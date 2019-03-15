@@ -83,7 +83,23 @@ echo "192.168.50.101   anderedomain.ch" >> /etc/hosts
 sudo service postfix restart
 ````
 ### Dovecot
+firewall deaktivieren
+password nicht vergessen
 
+diese eisntellungen setzten
+disable_plaintext_auth = no
+mail_privileged_group = mail
+mail_location = mbox:~/mail:INBOX=/var/mail/%u
+userdb {
+  driver = passwd
+}
+passdb {
+  args = %s
+  driver = pam
+}
+protocols = " imap"
+
+nicht mail benutzen, thunderbird.
 ## Sicherheit
 Folgende Ports werden zwingend benötigt, damit unser Service funktioniert.
 * SMTP: 25

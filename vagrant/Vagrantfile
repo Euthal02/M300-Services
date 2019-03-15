@@ -25,7 +25,7 @@ lmtp_host_lookup = native
 smtp_host_lookup= native
 disable_dns_lookups = yes
 ignore_mx_lookup_error = yes" >> /etc/postfix/main.cf
-      sudo useradd blub
+      sudo useradd -m blub
       echo "
 localhost   ganzedomain.ch" >> /etc/hosts
       echo "192.168.50.101   anderedomain.ch" >> /etc/hosts
