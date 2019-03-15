@@ -13,6 +13,57 @@ Vagrant.configure(2) do |config|
     end
     # mit diesem abschnitt bringen wir die VM auf den eusten stand
     ms1.vm.provision "shell", inline: <<-SHELL
+      echo "localhost   meuthak.ch" >> /etc/hosts
+      echo "localhost   meuthak.ch" >> /etc/hosts
+      SHELL
+  end
+
+  # the second vm gets defined with a different name
+  config.vm.define "mail-server-2" do |ms2|
+    # again, the needed information
+    ms2.vm.box = "ubuntu/xenial64"
+    ms2.vm.hostname = "mail-server-2-hostname"
+    ms2.vm.network "private_network", ip: "192.168.50.101"
+    ms2.vm.network "forwarded_port", guest: 80, host: 9080
+    # the physical propertys
+    ms2.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+      vb.name = "mail_server_2"
+    end
+    # mit diesem abschnitt bringen wir die VM auf den eusten stand
+    ms2.vm.provision "shell", inline: <<-SHELL
+      echo "localhost   meuthak.ch" >> /etc/hosts
+      echo "localhost   meuthak.ch" >> /etc/hosts
+      SHELL
+  end
+end
+
+
+
+
+
+
+
+
+
+
+
+
+Vagrant.configure(2) do |config|
+  # define our first vm, named mail-server-1
+  config.vm.define "mail-server-1" do |ms1|
+    # define the needed infomation, so that the vm can get created
+    ms1.vm.box = "ubuntu/xenial64"
+    ms1.vm.hostname = "mail-server-1-hostname"
+    ms1.vm.network "private_network", ip: "192.168.50.100"
+    ms1.vm.network "forwarded_port", guest: 80, host: 8080
+    # here we define the physical propertys of the vm
+    ms1.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+      vb.name = "mail_server_1"
+    end
+    # mit diesem abschnitt bringen wir die VM auf den eusten stand
+    ms1.vm.provision "shell", inline: <<-SHELL
       # install latest updates
       sudo apt-get update
       sudo apt-get upgrade -y
@@ -24,8 +75,9 @@ Vagrant.configure(2) do |config|
     ms1.vm.provision "shell", inline: <<-SHELL
       sudo su
       echo "localhost   meuthak.ch" >> /etc/hosts
-      echo "localhost   meuthak.ch" >> /etc/hosts
-      sudo apt-get -y install apache2
+      echo "192.168.50.101    test.ch" >> /etc/hosts
+      debconf-set-selections <<< "postfix postfix/main_mailer_type string 'No Configuration'"
+      sudo apt-get -y install postfix
       SHELL
   end
 
@@ -52,9 +104,10 @@ Vagrant.configure(2) do |config|
     # um eien möglichen reboot nach den aktualisierungen durchzuführen
     ms2.vm.provision :reload
     ms2.vm.provision "shell", inline: <<-SHELL
-      echo "localhost   meuthak.ch" >> /etc/hosts
-      echo "localhost   meuthak.ch" >> /etc/hosts
-      sudo apt-get -y install apache2
+      echo "localhost   test.ch" >> /etc/hosts
+      echo "192.168.50.100    meuthak.ch" >> /etc/hosts
+      debconf-set-selections <<< "postfix postfix/main_mailer_type string 'No Configuration'"
+      sudo apt-get -y install postfix
       SHELL
   end
 end

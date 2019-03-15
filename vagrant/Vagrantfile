@@ -13,27 +13,29 @@ Vagrant.configure(2) do |config|
     end
     # mit diesem abschnitt bringen wir die VM auf den eusten stand
     ms1.vm.provision "shell", inline: <<-SHELL
-      echo "localhost   meuthak.ch" >> /etc/hosts
-      echo "localhost   meuthak.ch" >> /etc/hosts
-      SHELL
-  end
-
-  # the second vm gets defined with a different name
-  config.vm.define "mail-server-2" do |ms2|
-    # again, the needed information
-    ms2.vm.box = "ubuntu/xenial64"
-    ms2.vm.hostname = "mail-server-2-hostname"
-    ms2.vm.network "private_network", ip: "192.168.50.101"
-    ms2.vm.network "forwarded_port", guest: 80, host: 9080
-    # the physical propertys
-    ms2.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
-      vb.name = "mail_server_2"
-    end
-    # mit diesem abschnitt bringen wir die VM auf den eusten stand
-    ms2.vm.provision "shell", inline: <<-SHELL
-      echo "localhost   meuthak.ch" >> /etc/hosts
-      echo "localhost   meuthak.ch" >> /etc/hosts
+      debconf-set-selections <<< "postfix postfix/mailname string mail1.meuthak.ch"
+      debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+      sudo apt-get -y install postfix sasl2-bin mailx
+      #echo "localhost   meuthak.ch  mail.meuthak.ch" >> /etc/hosts
+      #sudo cp /usr/share/postfix/main.cf.dist /etc/postfix/main.cf
+      #sudo sed -i 's/#mail_owner = postfix/mail_owner = postfix/g' /etc/postfix/main.cf
+      #sudo sed -i 's/#myhostname = host.domain.tld/myhostname = mail1.meuthak.ch/g' /etc/postfix/main.cf
+      #sudo sed -i 's/#mydomain = domain.tld/mydomain = meuthak.ch/g' /etc/postfix/main.cf
+      #sudo sed -i 's/#inet_interfaces = all/inet_interfaces = all/g' /etc/postfix/main.cf
+      #sudo sed -i 's/#mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain/mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain/g' /etc/postfix/main.cf
+      #sudo sed -i 's/mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,/#mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain,/g' /etc/postfix/main.cf
+      #sudo sed -i "s:mynetworks = 127.0.0.0\/8:mynetworks = 127.0.0.0\/8 0.0.0.0\/0':g" /etc/postfix/main.cf
+      #sudo sed -i 's;#alias_maps = hash:\/etc\/aliases;alias_maps = hash:\/etc\/aliases;g' /etc/postfix/main.cf
+      #sudo sed -i 's;sendmail_path =;sendmail_path = \/usr\/sbin\/postfix;g' /etc/postfix/main.cf
+      #sudo sed -i 's;newaliases_path =;newaliases_path = \/usr\/bin\/newaliases;g' /etc/postfix/main.cf
+      #sudo sed -i 's;mailq_path =;mailq_path = \/usr\/bin\/mailq;g' /etc/postfix/main.cf
+      #sudo sed -i 's;setgid_group =;setgid_group = postdrop;g' /etc/postfix/main.cf
+      #echo "# add to the end of file: limit an email size to 10M
+#message_size_limit = 10485760
+# limit mailbox size to 1G
+#mailbox_size_limit = 1073741824" >> /etc/postfix/main.cf
+#myorigin = /etc/mailname
+#}
       SHELL
   end
 end

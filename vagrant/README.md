@@ -46,3 +46,6 @@ If you just want it for single install run:
 
 DEBIAN_FRONTEND=noninteractive apt-get install PACKAGE
 ```
+
+Dadurch waren wir anschliessend in der Lage diesem Tutorial zu folgen.<br>
+https://websiteforstudents.com/install-postfix-mta-on-ubuntu-16-04-17-10-18-04/
