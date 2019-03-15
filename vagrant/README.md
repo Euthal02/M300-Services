@@ -30,6 +30,7 @@ vagrant plugin install vagrant-reload
 Anschliessend kann mit der folgenden Option in enem Vagrantfile ein reload gemacht werden: `config.vm.provision :reload`
 
 ## Installation
+### Postfix
 Bei der eigentlichen Installation mussten wir zuerst herausfinden wie es genau funktioniert zwei VMs zu erstellen. Dies konnte einfach und schnell erledigt werden. Zur gleichen Zeit setzten wir per Hand einen Mail **(SMTP)** Server auf.
 
 Durch die Teamaufteilung konnte das gemacht werden. Der Sinn dahinter war, die Installation einmal durchzugehen und anschliessend in Vagrant Commands umzusetzen.
@@ -47,5 +48,48 @@ If you just want it for single install run:
 DEBIAN_FRONTEND=noninteractive apt-get install PACKAGE
 ```
 
-Dadurch waren wir anschliessend in der Lage diesem Tutorial zu folgen.<br>
-https://websiteforstudents.com/install-postfix-mta-on-ubuntu-16-04-17-10-18-04/
+Anfangs erschien dies als gute Möglichkeit, anschliesend haben wir uns aber dazu entschieden die debconf selections vorher zu setzen.<br>
+```
+debconf-set-selections <<< "postfix postfix/mailname string meuthak.ch"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+```
+Dadurch konnten wir anschliessend das Config File bearbeiten. Ich habe folgende Settings auf meinen lokalen VMs gesetzt:<br>
+
+| Namen        | Domain          | IP  |
+| :-------------:|:-------------:|:-----:|
+| mail-server-1      | ganzedomain.ch | 192.168.50.100 |
+| mail-server-2      | anderedomain.ch      | 192.168.50.101 |
+Falls wir es hinbekommen, zusammen eine Umgebung aufzubauen, wird Nico folgende Namen und Infos haben:
+
+| Namen        | Domain          | IP  |
+| :-------------:|:-------------:|:-----:|
+| mail-server-10      | nico-domain-1.ch | 10.71.13.18:125 |
+| mail-server-20      | nico-domain-2.ch      | 10.71.13.18:225 |
+*Seine IP, welche von Herr Berger zugeteilt worden ist, ist die 10.71.13.18*<br>
+Auf allen Servern ist ein Mailserver installiert. Folgende Einstellungen müssen gesetzt sein, damit man einen Mail Server einrichten kann.
+````
+sudo apt-get -y install postfix mailx
+sleep 2
+sudo sed -i "s;mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128;mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 0.0.0.0/0;g" /etc/postfix/main.cf
+echo "# needed config for lookup service
+lmtp_host_lookup = native
+smtp_host_lookup= native
+disable_dns_lookups = yes
+ignore_mx_lookup_error = yes" >> /etc/postfix/main.cf
+sudo useradd blub
+echo "
+localhost   ganzedomain.ch" >> /etc/hosts
+echo "192.168.50.101   anderedomain.ch" >> /etc/hosts
+sudo service postfix restart
+````
+### Dovecot
+
+## Sicherheit
+Folgende Ports werden zwingend benötigt, damit unser Service funktioniert.
+* SMTP: 25
+* POP3: 110
+* IMAP: 143
+* SMTP Secure: 465
+* MSA: 587
+* IMAP Secure: 993
+* POP3 Secure: 995
