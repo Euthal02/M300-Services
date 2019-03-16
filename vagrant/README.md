@@ -159,3 +159,5 @@ Ausserdem hat jeder Server einen eigenen Port für jeden Service. Dies muss sin,
 ![alt text](https://www.thunderbird.net/media/img/thunderbird/landing/wordmark.png "Der Thunderbird Mail Client")<br>
 Wie erwähnt empfehlen wir den Thunderbird Mail Client zu benutzen, da dieser getestet ist und funktioniert.<br>
 https://www.thunderbird.net/de/
+
+Mit diesen Infos kann jeder seinen eigenen Mailserver aufsetzen. Und benutzen.
