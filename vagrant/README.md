@@ -65,7 +65,7 @@ Falls wir es hinbekommen, zusammen eine Umgebung aufzubauen, wird Nico folgende 
 | :-------------:|:-------------:|:-----:|
 | mail-server-10      | nico-domain-1.ch | 10.71.13.18:125 |
 | mail-server-20      | nico-domain-2.ch      | 10.71.13.18:225 |
-*Seine IP, welche von Herr Berger zugeteilt worden ist, ist die 10.71.13.18*<br>
+**Seine IP, welche von Herr Berger zugeteilt worden ist, ist die 10.71.13.18. Die beiden spezifischen Ports werden gesetzt, da wir sonst keine Möglichekti aben, beide Server zu kontaktieren.**<br>
 Auf allen Servern ist ein Mailserver installiert. Folgende Einstellungen müssen gesetzt sein, damit man einen Mail Server einrichten kann.
 ````
 sudo apt-get -y install postfix mailx
@@ -83,10 +83,14 @@ echo "192.168.50.101   anderedomain.ch" >> /etc/hosts
 sudo service postfix restart
 ````
 ### Dovecot
-firewall deaktivieren
-password nicht vergessen
+Anschliessend haben wir Dovecot als IMAP Server installiert.
+https://wiki.ubuntuusers.de/Dovecot/<br>
+Theoretisch wäre es auch möglich Dovecot als POP3 zu installieren. Wir haben uns aber dazu entschieden nur den **IMAP Server** umzusetzen. Dies war ganz einfach, da wir nur ein Paket installieren mussten und eie Konfiguration umändern.
 
-diese eisntellungen setzten
+Ganz Wichtig ist dabei, dass man die Firewall deaktiviert und die hosts Datei anpasst. Das Passwort muss auch angepasst werden, damit man sich einlogen kann. Es muss vorher schon *verschlüsselt* werden, ansonsten wird es nicht korrekt geparsert.
+
+Anschliessend müssen diese Einstellungen gesetzt werden:
+````
 disable_plaintext_auth = no
 mail_privileged_group = mail
 mail_location = mbox:~/mail:INBOX=/var/mail/%u
@@ -98,14 +102,20 @@ passdb {
   driver = pam
 }
 protocols = " imap"
+protocol imap {
+  mail_plugins = " autocreate"
+}
+plugin {
+  autocreate = Trash
+  autocreate2 = Sent
+  autosubscribe = Trash
+  autosubscribe2 = Sent
+````
 
-nicht mail benutzen, thunderbird.
+**GANZ WICHTIG!!!**
+Das Mail Programm von Windows 10 funktioniert mit diesem Service nicht, wir empfehleen den Thunderbird Mail Manager.
+
 ## Sicherheit
 Folgende Ports werden zwingend benötigt, damit unser Service funktioniert.
 * SMTP: 25
-* POP3: 110
 * IMAP: 143
-* SMTP Secure: 465
-* MSA: 587
-* IMAP Secure: 993
-* POP3 Secure: 995
