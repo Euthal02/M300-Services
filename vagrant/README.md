@@ -63,8 +63,8 @@ Falls wir es hinbekommen, zusammen eine Umgebung aufzubauen, wird Nico folgende 
 
 | Namen        | Domain          | IP  |
 | :-------------:|:-------------:|:-----:|
-| mail-server-10      | nico-domain-1.ch | 10.71.13.18:125 |
-| mail-server-20      | nico-domain-2.ch      | 10.71.13.18:225 |
+| mail-server-10      | nico-ganzedomain.ch | 10.71.13.18:125 |
+| mail-server-20      | nico-anderedomain.ch      | 10.71.13.18:225 |
 **Seine IP, welche von Herr Berger zugeteilt worden ist, ist die 10.71.13.18. Die beiden spezifischen Ports werden gesetzt, da wir sonst keine Möglichekti aben, beide Server zu kontaktieren.**<br>
 Auf allen Servern ist ein Mailserver installiert. Folgende Einstellungen müssen gesetzt sein, damit man einen Mail Server einrichten kann.
 ````
@@ -115,10 +115,47 @@ plugin {
 **GANZ WICHTIG!!!**
 Das Mail Programm von Windows 10 funktioniert mit diesem Service nicht, wir empfehleen den Thunderbird Mail Manager.
 
-## Verbindung zu nico
-
-
+## Verbindung mit Nico
+Die Verbindung zu Nico müsste noch getestet werden, funktioniert aber nach dem selben Prinzip. Es ist alles vordefiniert, nur noch die host datei muss von Ihm angepasst werden.
+````
+127.0.0.1 nico-ganzedomain.ch
+127.0.0.1 nico-anderedomain.ch
+10.71.13.17 ganzedomain.ch
+10.71.13.17 anderedomain.ch
+````
+Die Firewall muss deaktiviert werden und ein eigenes Vagrantfile wurde von ihm geschrieben. Dies hat er selbst geschrieben, zeitgleich mit mir.
 ## Sicherheit
 Folgende Ports werden zwingend benötigt, damit unser Service funktioniert.
 * SMTP: 25
 * IMAP: 143
+
+Diese sind per Firewall geöffnet, die restlichen Ports sind per Firewall gesperrt. So wie uns Herr Berger dies gezeigt hat.
+
+# Benutzung
+Auf allen Servern, ist momentan nur ein einziger Benutzer, der Nutzer **blub**.
+
+| Namen        | Passwort      |
+| :-------------:|:-------------:|
+| blub     | asdf1234 |
+
+Das Passwort wurde verhältnissmässig schwach gewählt, da dies nur eine Testumgebung ist.
+
+Aussenstehende müssen Ihre hosts Datei folgendermassen anpassen:
+````
+10.71.13.18 nico-ganzedomain.ch
+10.71.13.18 nico-anderedomain.ch
+10.71.13.17 ganzedomain.ch
+10.71.13.17 anderedomain.ch
+````
+Ausserdem hat jeder Server einen eigenen Port für jeden Service. Dies muss sin, da wir jeweils zwei Server hinter derselben IP haben.
+
+| Namen        | IMAP          | SMTP  |
+| :-------------:|:-------------:|:-----:|
+|nico-ganzedomain.ch|1143|125|
+|nico-anderedomain.ch|2143|225|
+|ganzedomain.ch|1143|125|
+|anderedomain.ch|2143|225|
+
+![alt text](https://www.thunderbird.net/media/img/thunderbird/landing/wordmark.png "Der Thunderbird Mail Client")<br>
+Wie erwähnt empfehlen wir den Thunderbird Mail Client zu benutzen, da dieser getestet ist und funktioniert.<br>
+https://www.thunderbird.net/de/
