@@ -115,6 +115,9 @@ plugin {
 **GANZ WICHTIG!!!**
 Das Mail Programm von Windows 10 funktioniert mit diesem Service nicht, wir empfehleen den Thunderbird Mail Manager.
 
+## Verbindung zu nico
+
+
 ## Sicherheit
 Folgende Ports werden zwingend benötigt, damit unser Service funktioniert.
 * SMTP: 25
