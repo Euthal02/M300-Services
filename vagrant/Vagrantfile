@@ -62,6 +62,12 @@ plugin {
   autosubscribe2 = Sent
 }" >> /etc/dovecot/dovecot.conf
       service dovecot restart
+
+      # security
+      sudo ufw -f enable
+      sudo ufw allow 22/tcp
+      sudo ufw allow 143/tcp
+      sudo ufw allow 25/tcp
       SHELL
   end
 
@@ -128,6 +134,12 @@ plugin {
   autosubscribe2 = Sent
 }" >> /etc/dovecot/dovecot.conf
       service dovecot restart
+
+      # security
+      sudo ufw -f enable
+      sudo ufw allow 22/tcp
+      sudo ufw allow 143/tcp
+      sudo ufw allow 25/tcp
       SHELL
   end
 end
