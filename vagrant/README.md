@@ -6,8 +6,16 @@ Für die LB1 habe ich mir überlegt einen **Mailserver** zu machen. Ich werde me
 
 Für einen zweiten Weg, wird Nico Knüsel eine ähnliche Umgebung aufbauen, damit auch der Traffic über das *"Internet"* funktioniert.
 So in etwa würde unsere Umgebung aussehen:
-![alt text](https://thomas-leister.de/images/2016/04/21/mailserver-schema.png "Unser gewolltes Setup")
-Beide werden eine solche Umgebung aufbauen. er /etc/hosts werden wir dann in der Lage sein eine Domain zu mappen.
+![alt text](https://thomas-leister.de/images/2016/04/21/mailserver-schema.png "Unser gewolltes Setup")<br>
+
+| Namen        | Domain          | IP  |
+| :-------------:|:-------------:|:-----:|
+| mail-server-1      | ganzedomain.ch | 192.168.50.100 |
+| mail-server-2      | anderedomain.ch      | 192.168.50.101 |
+| client-1      |  | 192.168.50.100 |
+| cient-2      |     | 192.168.50.101 |
+
+Beide werden eine solche Umgebung aufbauen. Per /etc/hosts werden wir dann in der Lage sein eine Domain zu mappen. Unsere Umgebungen haben beide eine öffentliche IP Adresse, mit welcher Sie erreichbar ist.
 
 ### Infos
 Um in das Thema hinein zu kommen, haben wir folgende Seite als Infoquelle genutzt:<br>

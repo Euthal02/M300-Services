@@ -39,6 +39,8 @@ ignore_mx_lookup_error = yes" >> /etc/postfix/main.cf
       echo "
 localhost   ganzedomain.ch" >> /etc/hosts
       echo "192.168.50.101   anderedomain.ch" >> /etc/hosts
+      echo "10.71.13.18 nico-ganzedomain.ch" >> /etc/hosts
+      echo "10.71.13.18 nico-anderedomain.ch" >> /etc/hosts
       newaliases
       service postfix restart
       echo "disable_plaintext_auth = no
@@ -111,6 +113,8 @@ ignore_mx_lookup_error = yes" >> /etc/postfix/main.cf
       echo "
 localhost   anderedomain.ch" >> /etc/hosts
       echo "192.168.50.100   ganzedomain.ch" >> /etc/hosts
+      echo "10.71.13.18 nico-ganzedomain.ch" >> /etc/hosts
+      echo "10.71.13.18 nico-anderedomain.ch" >> /etc/hosts
       newaliases
       service postfix restart
       echo "disable_plaintext_auth = no
