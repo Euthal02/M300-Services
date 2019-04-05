@@ -1,20 +1,20 @@
-Docker Testumgebung 
-===================
-
+# Vorgaben von Herrn Berger
+Diese Angaben wurden uns von Herrn Berger übergeben. Damit sind wir in der Lage eine VM zu starten, mit Docker schon installiert.
+***
+## Docker Testumgebung
     +---------------------------------------------------------------+
-    ! Container-Engine: Docker                                      !	
+    ! Container-Engine: Docker                                      !
     +---------------------------------------------------------------+
-    ! Gast OS: Ubuntu 16.04                                         !	
+    ! Gast OS: Ubuntu 16.04                                         !
     +---------------------------------------------------------------+
-    ! Hypervisor: VirtualBox                                        !	
+    ! Hypervisor: VirtualBox                                        !
     +---------------------------------------------------------------+
-    ! Host-OS: Windows, MacOS, Linux                                !	
+    ! Host-OS: Windows, MacOS, Linux                                !
     +---------------------------------------------------------------+
     ! Notebook - Schulnetz 10.x.x.x                                 !                 
     +---------------------------------------------------------------+
-
-### Beschreibung
 ***
+### Beschreibung
 
 Einfache VM mit Docker installiert.
 
@@ -36,10 +36,9 @@ Es muss einmalig die VM mit Docker erstellt und in die VM gewechselt werden:
 Die Beispiele befinden sich, in der VM, im Verzeichnis `/vagrant`. Die Anwahl ist wie folgt:
 
 	cd /vagrant/<Beispiel>
-	
+
 Die VM kann wie folgt verlassen heruntergefahren und gelöscht werden:
 
 	exit
 	vagrant halt
 	vagrant destroy -f
-	
