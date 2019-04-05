@@ -42,3 +42,5 @@ Die VM kann wie folgt verlassen heruntergefahren und gelöscht werden:
 	exit
 	vagrant halt
 	vagrant destroy -f
+***
+Wir haben jedoch einige Änderungen vorgenommen, da wir den Port 25 nach aussen benötigen.
