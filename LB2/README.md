@@ -44,3 +44,10 @@ Die VM kann wie folgt verlassen heruntergefahren und gelöscht werden:
 	vagrant destroy -f
 ***
 Wir haben jedoch einige Änderungen vorgenommen, da wir den Port 25 nach aussen benötigen.
+Daher werden wir ein eigenes Vagrantfile verweden und Herrn Berger übergeben.
+
+# Voraussetzungen
+Um unseren Service zu isntallieren, müssen folgende Dinge gegeben sein.
+* vagrant muss installiert sein.
+* Dieses Repository muss geklont sein.
+* Unser Vagrantfile muss ausgeführt werden.
