@@ -51,3 +51,25 @@ Um unseren Service zu isntallieren, müssen folgende Dinge gegeben sein.
 * vagrant muss installiert sein.
 * Dieses Repository muss geklont sein.
 * Unser Vagrantfile muss ausgeführt werden.
+
+Dadurch werden die benötigten Packete automatisch erstellt.<br>
+Zum Beispiel **docker-compose** dies wird gebraucht, damit wir unseren Container mit den benötigten Variabeln starten können.
+
+Anschliessend kann man per
+
+    vagrant ssh
+
+auf die VM zugreifen und unser Dockerfile mit diesem Command ausführen.
+
+    docker build /home/vagrant/sync/ -t mail_server
+
+Dadurch wird nser Image erstellt. Dieses Image wird dann gebraucht, um unseren Container zu erstellen.
+
+# Dockerfile
+
+## Ausfühern
+Mit diesem Command können wir aus unserem Image einen Container erstellen.
+
+docker run -d -e MAILNAME=ganzedomain.ch -e MYNETWORKS="127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 0.0.0.0/0" -p 25:25 -p 143:143 mail_server
+
+Dorthin werden die Ports 25 und 143 geroutet.

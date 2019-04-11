@@ -22,7 +22,7 @@ Vagrant.configure("2") do |docker|
 
   # Docker Provisioner
   docker.vm.provision "docker" do |d|
-   d.pull_images "panubo/postfix"
+   d.pull_images "debian:stretch"
   end
 
   docker.vm.provision "shell", inline: <<-SHELL
