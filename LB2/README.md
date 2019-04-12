@@ -56,16 +56,16 @@ Bei unserer Umgebung werden wwir einen Mail Server machen, welcher SMTP und IAP 
 Für unser IP Konzept und Naming haben wir keine speziellen Forderungen gesetzt.
 Wir haben direkt die IP die von Herr Berger definiert wurde auf unseren Ethernet Interfaces definiert.
 Dadurch konnten wir immer einfach diret die korrekte IP bekommen.<br>
-Denn im Moment verwenden wir unsere Interfaces in keinem andere Modul als diesem.
+Denn im Moment verwenden wir unsere Interfaces in keinem andere Modul als diesem. Bei Nico wäre diese IP 10.71.13.18 bei Marco wäre diese IP Adresse 10.71.13.17.
 
 # Voraussetzungen
-Um unseren Service zu isntallieren, müssen folgende Dinge gegeben sein.
+Um unseren Service zu installieren, müssen folgende Dinge gegeben sein.
 * vagrant muss installiert sein.
 * Dieses Repository muss geklont sein.
 * Unser Vagrantfile muss ausgeführt werden.
 
 ## vagrant installieren
-Vagrant kann auf der folgende WEbseite installiert werden.
+Vagrant kann auf der folgende Webseite installiert werden.
 
 [Vagrant Downloader und weitere Informationen](https://vagrantup.com)
 
@@ -140,11 +140,11 @@ Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns dire
 
 | Namen  | Beschreibung      | Durchführer          | Wann | Soll | Ist | Grund |
 | :-------------: | :-------------: | :-----: | :-----: | :-----: |  :-----: | :-----: |
-| Server und Container erreichbar? | Zuerst testen wir, ob wir uns per SSH auf die VM einloggen können. Falls dies funktioniert, testen wir ob wir uns auf den Container einloggen können. Mittels "docker exec -it docker_id bash" | nkn | 05.04.2019 | Login funktioniert | Login funktioniert. | - |
-| User testen | Da wir zwei seperate egenständige User erstellt haben, müssen wir testen ob diese fuktionieren. Wir versucen uns also mittels "su username" einzuloggen. Das Passwort ist bei allen gleich. asdf1234 | mka | 05.04.2019 | Man kann sich in die User einloggen. | Man kann sich in die User einloggen. | - |
-| Postfix Test | Wir testen zuerst einmal die lokale Übertragung des Postfix Servers. Dies gescheht mithilfe des installierten Packets mailx. Wir wissen mitlerweile schon, das die User funktionieren, also senden wir mit folgendem Command ein Mail dem User Test. "echo "Dies ist ein Test" : mailx -s test@ganzedmain.ch | mka | 12.04.2019 | Mail wird versendet und kommt an. | Mail wird versendet und kommt an. | - |
-| Dovecot Test | Login mit einem Systemuser auf dem Thunderbird per IMAP. Passwort und Username bleiben gleich. | mka | 05.04.2019 | Login funktioniert. | Login funktioniert nicht. | Nach einem tcpdump trace, konnten wir herausfinden, weshab wir uns ncht einloggen können. Es kommen gar keine Pakete an. Nach einer langen Fehlersuche konnten wir anschliessend herausfinden, dass das Probleem daher kommt, das die lokale Firewall noch allen Traffic blockiert. |
-| Mails von extern versenden. | Wir wissen nun, dass man sich per Dovecot einloggen kann und das der Server intern Mails versenden kann. Der nächstlogische Schritt ist also uns per IMAP einzuloggen und ein Mail an einen anderen User auf dem Server zu versenden. | nkn | 05.04.2019 | Mail werden versendet und kommen an. | Mails werden versendet, kommen aber nicht an. | Wir konnten herausfinden, dass unter dem Directory /var/mail/username das Mail zwar hineinkommt jedoch wird dies nicht vom Dovecot Service erkannt. Wir sehen aber, das das Mail vom Client versendet worden ist. Jedoch zeigt es anschliessend auf dem Empfänger Konto nichts an. Wir konnten bis jetzt noch keine genaueren Infos dazu finden. |
+| Server und Container erreichbar? | Zuerst testen wir, ob wir uns per SSH auf die VM einloggen können. Falls dies funktioniert, testen wir ob wir uns auf den Container einloggen können. Mittels `docker exec -it docker_id bash` | nkn | 05.04.2019 | Login funktioniert | Login funktioniert. | - |
+| User testen | Da wir zwei seperate egenständige User erstellt haben, müssen wir testen ob diese fuktionieren. Wir versucen uns also mittels `su username` einzuloggen. Das Passwort ist bei allen gleich. `asdf1234` | mka | 05.04.2019 | Man kann sich in die User einloggen. | Man kann sich in die User einloggen. | - |
+| Postfix Test | Wir testen zuerst einmal die lokale Übertragung des Postfix Servers. Dies gescheht mithilfe des installierten Packets mailx. Wir wissen mitlerweile schon, das die User funktionieren, also senden wir mit folgendem Command ein Mail dem User Test. `echo "Dies ist ein Test" &#124; mailx -s "Betreff" test@ganzedmain.ch` | mka | 12.04.2019 | Mail wird versendet und kommt an. | Mail wird versendet und kommt an. | - |
+| Dovecot Test | Login mit einem Systemuser auf dem Thunderbird per IMAP. Passwort und Username bleiben gleich. | mka | 05.04.2019 | Login funktioniert. | Login funktioniert nicht. | Nach einem `tcpdump trace`, konnten wir herausfinden, weshab wir uns ncht einloggen können. Es kommen gar keine Pakete an. Nach einer langen Fehlersuche konnten wir anschliessend herausfinden, dass das Problem daher kommt, das die lokale Firewall noch allen Traffic blockiert. |
+| Mails von extern versenden. | Wir wissen nun, dass man sich per Dovecot einloggen kann und das der Server intern Mails versenden kann. Der nächstlogische Schritt ist also uns per IMAP einzuloggen und ein Mail an einen anderen User auf dem Server zu versenden. | nkn | 05.04.2019 | Mail werden versendet und kommen an. | Mails werden versendet, kommen aber nicht an. | Wir konnten herausfinden, dass unter dem Directory `/var/mail/username` das Mail zwar hineinkommt jedoch wird dies nicht vom Dovecot Service erkannt. Wir sehen aber, das das Mail vom Client versendet worden ist. Jedoch zeigt es anschliessend auf dem Empfänger Konto nichts an. Wir konnten bis jetzt noch keine genaueren Infos dazu finden. |
 
 
 Diese Tests werden auf unserer vagrant VM oder innerhalb des Docker Containers gemacht.
