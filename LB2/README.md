@@ -93,7 +93,7 @@ Unser Dockerfile ist sehr einfacche aufgbeaut, mit verschiedenen Abschnitten, we
 
 ZB. Ist jeder RUN CCommand ein eigener Service.<br>
 
- Dies ermöglicht uns eine einfache und schnelle konfiguration welch übersichtlich ist und uns aufschluss darüber verleit was genau beim ausführen des Dockerfiles geschieht.
+ Dies ermöglicht uns eine einfache und schnelle konfiguration welch übersichtlich ist und uns Aufschluss darüber verleit was genau beim ausführen des Dockerfiles geschieht.
 
   Im Dockerfile können wir ausserdem auch ENV Variablen definieren, welche anschliessend vom System übernommen wwerden.
 
@@ -127,6 +127,7 @@ Zum Beispiel hatte das Logging nicht funktioniert, bis wir den Service syslogd i
 # Testfälle
 Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns direkt durchgeführt. Leider hatten wir keine Möglichkeit mehr an einer unabhängigen und nicht Technik versierten Person unseren Service zum testen zu geben.
 
+
 | Namen  |Beschriebung      | Durchführer          | Wann | Soll | Ist | Grund |
 | :-------------:|:-------------:|:-----:|:-----:|:-----:|
 |Server und Container erreichbar?|Zuerst testen wir, ob wir uns per SSH auf die VM einloggen können. Falls dies funktioniert, testen wir ob wir uns auf den Container einloggen können. Mittels "docker exec -it docker_id bash"|nkn|05.04.2019|Login funktioniert|Login funktioniert.|-|
@@ -134,5 +135,6 @@ Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns dire
 |Postfix Test|Wir testen zuerst einmal die lokale Übertragung des Postfix Servers. Dies gescheht mithilfe des installierten Packets mailx. Wir wissen mitlerweile schon, das die User funktionieren, also senden wir mit folgendem Command ein Mail dem User Test. "echo "Dies ist ein Test" : mailx -s test@ganzedmain.ch |mka|12.04.2019|Mail wird versendet und kommt an.|Mail wird versendet und kommt an.|-|
 |Dovecot Test|Login mit einem Systemuser auf dem Thunderbird per IMAP. Passwort und Username bleiben gleich.|mka|05.04.2019|Login funktioniert.|Login funktioniert nicht.| Nach einem tcpdump trace, konnten wir herausfinden, weshab wir uns ncht einloggen können. Es kommen gar keine Pakete an. Nach einer langen Fehlersuche konnten wir anschliessend herausfinden, dass das Probleem daher kommt, das die lokale Firewall noch allen Traffic blockiert.|
 |Mails von extern versenden.|Wir wissen nun, dass man sich per Dovecot einloggen kann und das der Server intern Mails versenden kann. Der nächstlogische Schritt ist also uns per IMAP einzuloggen und ein Mail an einen anderen User auf dem Server zu versenden.|nkn|05.04.2019|Mail werden versendet und kommen an.|Mails werden versendet, kommen aber nicht an.|Wir konnten herausfinden, dass unter dem Directory /var/mail/username das Mail zwar hineinkommt jedoch wird dies nicht vom Dovecot Service erkannt. Wir sehen aber, das das Mail vom Client versendet worden ist. Jedoch zeigt es anschliessend auf dem Empfänger Konto nichts an. Wir konnten bis jetzt noch keine genaueren Infos dazu finden.||
+
 
 Diese Tests werden auf unserer vagrant VM oder innerhalb des Docker Containers gemacht.
