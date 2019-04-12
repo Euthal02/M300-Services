@@ -2,6 +2,9 @@ FROM debian:stretch
 
 EXPOSE 25 143
 ENV DEBIAN_FRONTEND noninteractive
+ENV MAILNAME ganzedomain.ch
+ENV MYNETWORKS "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 0.0.0.0/0"
+
 
 # Preselections for installation
 RUN set -x \
@@ -63,5 +66,5 @@ COPY opendkim.conf.sh /etc/
 COPY s6 /etc/s6/
 COPY entry.sh /
 
-#ENTRYPOINT ["/entry.sh"]
 CMD ["/usr/bin/s6-svscan", "/etc/s6"]
+#ENTRYPOINT ["/entry.sh"]

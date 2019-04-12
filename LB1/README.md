@@ -121,7 +121,7 @@ plugin {
 ````
 
 **GANZ WICHTIG!!!**
-Das Mail Programm von Windows 10 funktioniert mit diesem Service nicht, wir empfehleen den Thunderbird Mail Manager.
+Das Mail Programm von Windows 10 funktioniert mit diesem Service nicht, wir empfehlen den Thunderbird Mail Manager.
 
 ## Verbindung mit Nico
 Die Verbindung zu Nico müsste noch getestet werden, funktioniert aber nach dem selben Prinzip. Es ist alles vordefiniert, nur noch die host datei muss von Ihm angepasst werden.
