@@ -122,14 +122,14 @@ Dies ermöglicht uns eine einfache und schnelle konfiguration welch übersichtli
 
 Im Dockerfile können wir ausserdem auch ENV Variablen definieren, welche anschliessend vom System übernommen wwerden.
 
-Dies erreichen wir per **ENV variable**
+Dies erreichen wir per **ENV variable_name variable_wert**
 
 #### Abänderungen
 Wir haben das Dockerfile drekt vom postfix Imgae übernommen und einige Änderungen vorgenommen. Am wichtigsten dazu war aber noch zu vermerken, dass der **s6 Service** installiert wird.
 
 Der **s6 Service** sagte mir bis anhin nicht besonders viel. Anhand meiner Erfahrung erlaube ich mir aber die Annahme, dass dieser Service Konfigurationen erstellt.
 
-Ich konnte mithilfe dieses Services erreichen, dass alle Services automatisch neu starten welche ich benötige.
+Ich konnte mithilfe dieses Services erreichen, dass alle Services automatisch neu starten welche ich benötige. Ausserdem übernahm dieser Service die automatische Konfiguration.
 
 ### Ausführen
 Mit diesem Command können wir aus unserem Image einen Container erstellen.
@@ -177,14 +177,14 @@ Mit diesen Infos kann jeder seinen eigenen Mailserver aufsetzen. Und benutzen.
 # Firewall
 Wichtig ist, das auf dem lokalen Host die Firewall deaktiviert wird. Ansonsten verhindert diese die erfolgreiche Kommunikation zwischen dem Service und dem Client.
 
-Auf der Vagrant VM oder dem Docker Container haben wir keine genaueren Firewal Konfigurationen vorgenommen, dort ist also alles geööffnet und von aussen erreichbar.
+Auf der Vagrant VM oder dem Docker Container haben wir keine genaueren Firewall Konfigurationen vorgenommen, dort ist also alles geöffnet und von aussen erreichbar.
 
 # Probleme
 Wir hatten einige Probleme mit dem docker Container die wir mt dem Vagrantfile nicht hatten.
 
 Zum Beispiel hatte das Logging nicht funktioniert, bis wir den Service syslogd installierten. Anschliessend konntne wir einen Service nichteinfach so neu starten, bis wir systemd installierten.
 
-Bis jetzt haben wir Probleme, welche wir nicht lösen können
+Anschliessend hatten wir mit den Berechtigungen viele Probleme, oder bis wir endlich mal das Dockerfile genügend verstanden hatten. Sobald dies geschehen ist, konnten wir endich genauere Anpassungen und Änderungen in unserem Sinne durchführen.
 
 # Testfälle
 Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns direkt durchgeführt. Leider hatten wir keine Möglichkeit mehr an einer unabhängigen und nicht Technik versierten Person unseren Service zum testen zu geben.
@@ -202,3 +202,4 @@ Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns dire
 Diese Tests werden auf unserer vagrant VM oder innerhalb des Docker Containers gemacht.
 
 # Auswertung
+Wir denken das uns dieses Projekt gut gelungen ist. Wir konnten einiges lernen und profitieren. Mit dem Docker konnten wir uns viel weiterbilden.
