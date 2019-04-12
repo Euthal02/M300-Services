@@ -90,18 +90,18 @@ Anschliessend kann man per
 
     vagrant ssh
 
-auf die VM zugreifen und unser Dockerfile mit diesem Command ausführen.
+auf die VM zugreifen.
+
+# Dockerfile
+Unser Dockerfile kann man mit diesem Command ausführen.
 Besser gesagt mit diesem Command wird ein Image erstellt, aus dieessem anschliessend ein Conainer erstellt werden kann.
 
     docker build /home/vagrant/sync/ -t mail_server
 
 Dadurch wird nser Image erstellt. Dieses Image wird dann gebraucht, um unseren Container zu erstellen.
-Aus unserem Dockerfile liest der Build Command alle wichige Infos raus und wandelt diese in das Image um.
+Aus unserem Dockerfile liest der Build Command alle wichige Infos raus und wandelt diese in das Image um. Unser Dockerfile ist sehr einfach aufgbeaut, mit verschiedenen Abschnitten, welche die verschiedenen Services dastellen.<br>
 
-# Dockerfile
-Unser Dockerfile ist sehr einfacche aufgbeaut, mit verschiedenen Abschnitten, welche die verschiedenen Services dastellen.<br>
-
-ZB. Ist jeder RUN CCommand ein eigener Service.<br>
+ZB. Ist jeder RUN Command ein eigener Service.<br>
 
  Dies ermöglicht uns eine einfache und schnelle konfiguration welch übersichtlich ist und uns Aufschluss darüber verleit was genau beim ausführen des Dockerfiles geschieht.
 
@@ -133,6 +133,8 @@ Auf der Vagrant VM oder dem Docker Container haben wir keine genaueren Firewal K
 Wir hatten einige Probleme mit dem docker Container die wir mt dem Vagrantfile nicht hatten.
 
 Zum Beispiel hatte das Logging nicht funktioniert, bis wir den Service syslogd installierten. Anschliessend konntne wir einen Service nichteinfach so neu starten, bis wir systemd installierten.
+
+Bis jetzt haben wir Probleme, welche wir nicht lösen können
 
 # Testfälle
 Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns direkt durchgeführt. Leider hatten wir keine Möglichkeit mehr an einer unabhängigen und nicht Technik versierten Person unseren Service zum testen zu geben.
