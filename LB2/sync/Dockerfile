@@ -1,6 +1,7 @@
 FROM debian:stretch
 
 EXPOSE 25 143
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV MAILNAME ganzedomain.ch
 ENV MYNETWORKS "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 0.0.0.0/0"
@@ -52,7 +53,6 @@ RUN printf '\n# needed config for lookup service \nlmtp_host_lookup = native \ns
   && useradd -m test -p $(echo "asdf1234" | openssl passwd -1 -stdin) \
   && usermod -a -G mail test \
   && echo $'localhost   ganzedomain.ch' >> /etc/hosts \
-  && echo "10.71.13.18   anderedomain.ch" >> /etc/hosts \
   && newaliases \
   && printf 'disable_plaintext_auth = no \nmail_privileged_group = mail \nmail_location = mbox:~/mail:INBOX=/var/mail/%%u \nuserdb { \ndriver = passwd \n} \npassdb { \nargs = %s \ndriver = pam \n} \nnamespace inbox {\ninbox = yes\n  mailbox Trash {\n    auto = subscribe # autocreate and autosubscribe the Trash mailbox\n    special_use = \Trash\n  }\n  mailbox Sent {\n    auto = subscribe # autocreate and autosubscribe the Sent mailbox\n    special_use = \Sent\n}\n}' >> /etc/dovecot/dovecot.conf \
   && chown mail:mail /var/mail \
@@ -67,4 +67,3 @@ COPY s6 /etc/s6/
 COPY entry.sh /
 
 CMD ["/usr/bin/s6-svscan", "/etc/s6"]
-#ENTRYPOINT ["/entry.sh"]
