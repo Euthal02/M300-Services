@@ -49,7 +49,7 @@ RUN printf '\n# needed config for lookup service \nlmtp_host_lookup = native \ns
   && echo $'localhost   ganzedomain.ch' >> /etc/hosts \
   && echo "10.71.13.18   anderedomain.ch" >> /etc/hosts \
   && newaliases \
-  && printf 'disable_plaintext_auth = no \nmail_privileged_group = mail \nmail_location = mbox:~/mail:INBOX=/var/mail/%u \nuserdb { \ndriver = passwd \n} \npassdb { \nargs = %s \ndriver = pam \n} \nnamespace inbox {\ninbox = yes\n  mailbox Trash {\n    auto = subscribe # autocreate and autosubscribe the Trash mailbox\n    special_use = \Trash\n  }\n  mailbox Sent {\n    auto = subscribe # autocreate and autosubscribe the Sent mailbox\n    special_use = \Sent\n}\n}' >> /etc/dovecot/dovecot.conf
+  && printf 'disable_plaintext_auth = no \nmail_privileged_group = mail \nmail_location = mbox:~/mail:INBOX=/var/mail/%u \nuserdb { \ndriver = passwd \n} \npassdb { \nargs = %s \ndriver = pam \n} \nnamespace inbox {\ninbox = yes\n  mailbox Trash {\n    auto = subscribe # autocreate and autosubscribe the Trash mailbox\n    special_use = \Trash\n  }\n  mailbox Sent {\n    auto = subscribe # autocreate and autosubscribe the Sent mailbox\n    special_use = \Sent\n}\n}' >> /etc/dovecot/dovecot.conf \
   ;
 
 COPY header_checks /etc/postfix/header_checks

@@ -48,6 +48,12 @@ Die VM kann wie folgt verlassen heruntergefahren und gelöscht werden:
 Wir haben jedoch einige Änderungen vorgenommen, da wir den Port 25 nach aussen benötigen.
 Daher werden wir ein eigenes Vagrantfile verweden und Herrn Berger übergeben.
 
+# Technischer Beschrieb
+Bei unserer Umgebung werden wwir einen Mail Server machen, welcher SMTP und IMAP Beherrscht.
+
+## Netzwerkplan
+![Unser einfacher Netzwerkplan](netzwerk.jpg "Netzwerk")
+
 # Voraussetzungen
 Um unseren Service zu isntallieren, müssen folgende Dinge gegeben sein.
 * vagrant muss installiert sein.
