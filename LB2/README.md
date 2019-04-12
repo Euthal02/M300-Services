@@ -138,6 +138,11 @@ Mit diesem Command können wir aus unserem Image einen Container erstellen.
 
 Dorthin werden die Ports 25 und 143 geroutet. Es würden noch zwei Variablen benötigt werden, diese habe wir aber schon im Dockerfile mitgeben können. Dadurch erhalten wir eine kleineren Command der einfacher zu lesen ist.
 
+Die benötigten Variabeln wären:
+ * MAILNAME=ganzedomain.ch
+ * MYNETWORKS="127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 0.0.0.0/0"
+
+
 ## Client
 **GANZ WICHTIG!!!**
 Das Mail Programm von Windows 10 funktioniert mit diesem Service nicht, wir empfehlen den Thunderbird Mail Manager.
