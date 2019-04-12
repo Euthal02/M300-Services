@@ -128,8 +128,8 @@ Zum Beispiel hatte das Logging nicht funktioniert, bis wir den Service syslogd i
 Wir haben uns folgende Tests dazu überlegt. Diese Test wurden auch von uns direkt durchgeführt. Leider hatten wir keine Möglichkeit mehr an einer unabhängigen und nicht Technik versierten Person unseren Service zum testen zu geben.
 
 
-| Namen  |Beschriebung      | Durchführer          | Wann | Soll | Ist | Grund |
-| :-------------:|:-------------:|:-----:|:-----:|:-----:|
+| Namen  | Beschreibung      | Durchführer          | Wann | Soll | Ist | Grund |
+| :-------------: | :-------------: | :-----: | :-----: | :-----: |
 | Server und Container erreichbar? | Zuerst testen wir, ob wir uns per SSH auf die VM einloggen können. Falls dies funktioniert, testen wir ob wir uns auf den Container einloggen können. Mittels "docker exec -it docker_id bash" | nkn | 05.04.2019 | Login funktioniert | Login funktioniert. | - |
 | User testen | Da wir zwei seperate egenständige User erstellt haben, müssen wir testen ob diese fuktionieren. Wir versucen uns also mittels "su username" einzuloggen. Das Passwort ist bei allen gleich. asdf1234 | mka | 05.04.2019 | Man kann sich in die User einloggen. | Man kann sich in die User einloggen. | - |
 | Postfix Test | Wir testen zuerst einmal die lokale Übertragung des Postfix Servers. Dies gescheht mithilfe des installierten Packets mailx. Wir wissen mitlerweile schon, das die User funktionieren, also senden wir mit folgendem Command ein Mail dem User Test. "echo "Dies ist ein Test" : mailx -s test@ganzedmain.ch | mka | 12.04.2019 | Mail wird versendet und kommt an. | Mail wird versendet und kommt an. | - |
